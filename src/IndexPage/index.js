@@ -83,59 +83,22 @@ class IndexPage extends Component {
     return (
       <div>
         <Contents>
-          <Controls>
-            <div>
-              <Toggle
-                active={queryParamState.sort === "ascending"}
-                onClick={() => this.updateQueryParam({ sort: "ascending" })}
+          <CardGrid
+                display={queryParamState.display}
               >
-                <FontAwesomeIcon icon={faDollarSign} />
-                <FontAwesomeIcon icon={faSortAmountUp} />
-              </Toggle>
-              <Toggle
-                active={queryParamState.sort === "descending"}
-                onClick={() => this.updateQueryParam({ sort: "descending" })}
-              >
-                <FontAwesomeIcon icon={faDollarSign} />
-                <FontAwesomeIcon icon={faSortAmountDown} />
-              </Toggle>
-            </div>
-            <div>
-              <Toggle
-                active={queryParamState.display === "list"}
-                onClick={() => this.updateQueryParam({ display: "list" })}
-              >
-                <FontAwesomeIcon icon={faList} />
-              </Toggle>
-              <Toggle
-                active={queryParamState.display === "grid"}
-                onClick={() => this.updateQueryParam({ display: "grid" })}
-              >
-                <FontAwesomeIcon icon={faTh} />
-              </Toggle>
-            </div>
-          </Controls>
-          {visibleIconSets.length === 0 ? (
-            <NoResults>No Results Found</NoResults>
-          ) : (
-            <CardGrid
-              display={queryParamState.display}
-              ref={el => (this.cardGrid = el)}
-            >
-              {visibleIconSets.map(set => {
-                if (set === focusedSet) return <li key={set} />
-                return (
-                  <Card
-                    key={set}
-                    setKey={set}
-                    icons={icons[set]}
-                    iconCount={icons[set].length}
-                    navigate={this.navigate}
-                  />
-                )
-              })}
-            </CardGrid>
-          )}
+                {visibleIconSets.map(set => {
+                  if (set === focusedSet) return <li key={set} />
+                  return (
+                    <Card
+                      key={set}
+                      setKey={set}
+                      icons={icons[set]}
+                      iconCount={icons[set].length}
+                      navigate={this.navigate}
+                    />
+                  )
+                })}
+              </CardGrid>
         </Contents>
         <Route path="/:set/:focusedIcon?" component={IconSetPage} />
       </div>

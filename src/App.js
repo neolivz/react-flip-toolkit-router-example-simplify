@@ -62,6 +62,10 @@ const App = () => (
   <Router history={history}>
     <Route
       render={({ location, search }) => {
+        console.log({
+          location,
+          search,
+        })
         return (
           <Flipper
             flipKey={`${location.pathname}-${location.search}`}
@@ -70,23 +74,6 @@ const App = () => (
               search
             }}
           >
-            <Header>
-              <FlexContents>
-                <div>
-                  <Link to="/">
-                    <WorldIcon
-                      style={{ width: "20px", marginRight: ".5rem" }}
-                    />
-                    <h1> Icon Demo App</h1>
-                  </Link>
-                </div>
-                <div>
-                  <StyledLink href="https://github.com/aholachek/react-flip-toolkit">
-                    React-Flip-Toolkit
-                  </StyledLink>
-                </div>
-              </FlexContents>
-            </Header>
             <IndexPage />
           </Flipper>
         )

@@ -165,15 +165,7 @@ class IconSetCard extends PureComponent {
     this.props.navigate(this.props.setKey)
   }
 
-  shouldFlip = (prev, current) => {
-    const sort1 =
-      current.location.search.match(/sort=([^&]+)/) &&
-      current.location.search.match(/sort=([^&]+)/)[1]
-    const sort2 =
-      prev.location.search.match(/sort=([^&]+)/) &&
-      prev.location.search.match(/sort=([^&]+)/)[1]
-    return sort1 === sort2
-  }
+
 
   render() {
     const { setKey, icons, iconCount } = this.props
@@ -185,7 +177,6 @@ class IconSetCard extends PureComponent {
         onComplete={this.onComplete}
         onDelayedAppear={this.onDelayedAppear}
         onExit={this.onExit}
-        shouldInvert={this.shouldFlip}
       >
         <Card onClick={this.navigate}>
           <Flipped inverseFlipId={setKey}>
