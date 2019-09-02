@@ -1,42 +1,9 @@
 import React from "react"
 import { Router } from "react-router"
-import { Route, Link } from "react-router-dom"
+import { Route } from "react-router-dom"
 import { createBrowserHistory } from "history"
-import styled from "styled-components"
 import IndexPage from "./IndexPage"
-import { Contents } from "./BaseComponents"
 import { Flipper } from "react-flip-toolkit"
-import WorldIcon from "./IconComponents/environmental/World"
-
-const Header = styled.header`
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid black;
-  width: 100%;
-  z-index: 1;
-  position: relative;
-  background-color: #f1f1f1;
-  z-index: 10;
-  a {
-    color: black;
-    &:hover {
-      font-weight: bold;
-    }
-  }
-  h1 {
-    font-weight: normal;
-    font-size: 1rem;
-    display: inline;
-  }
-`
-
-const FlexContents = styled(Contents)`
-  display: flex;
-  justify-content: space-between;
-`
-
-const StyledLink = styled.a`
-  text-decoration: underline;
-`
 
 const history = createBrowserHistory()
 

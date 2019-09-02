@@ -55,25 +55,6 @@ const StyledLink = styled(Link)`
   }
 `
 
-const onComplete = el => {
-  // prevent scroll weirdness
-  el.firstElementChild.style.backgroundColor = '#fff'
-  anime({
-    targets: [...el.querySelectorAll("[data-fade-in]")],
-    opacity: [0, 1],
-    translateY: [15, 0],
-    delay: (el, i) => i * 70 + 200,
-    easing: "easeOutSine",
-    duration: 250
-  })
-}
-
-const onStart = el => {
-  ;[...el.querySelectorAll("[data-fade-in]")].forEach(
-    el => (el.style.opacity = "0")
-  )
-}
-
 const onExit = el => {
   return anime({
     targets: [

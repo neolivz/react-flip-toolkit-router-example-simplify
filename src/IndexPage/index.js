@@ -2,22 +2,7 @@ import React, { Component } from "react"
 import { Route, withRouter } from "react-router-dom"
 import qs from "qs"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faList,
-  faTh,
-  faFilter,
-  faDollarSign,
-  faSortAmountDown,
-  faSortAmountUp
-} from "@fortawesome/free-solid-svg-icons"
-import {
-  CardGrid,
-  Controls,
-  Toggle,
-  NoResults
-} from "./Components"
-
+import { CardGrid } from "./Components"
 import Card from "./Card"
 import IconSetPage from "../IconSetPage"
 import { Contents } from "../BaseComponents"
