@@ -12,18 +12,10 @@ import iconBaseStyles from "../iconBaseStyles"
 const IndexGrid = styled(BaseGridList)`
   width: 100%;
   grid-auto-rows: 3rem;
-  ${CardGrid + '[display="grid"]'} & {
+  ${CardGrid} & {
     grid-template-columns: repeat(3, 5rem);
     grid-gap: 2rem;
     margin-bottom: 2rem;
-  }
-  ${CardGrid + '[display="list"]'} & {
-    grid-template-columns: repeat(6, 5rem);
-    grid-gap: 3rem;
-
-    svg {
-      max-height: 4rem;
-    }
   }
 `
 
@@ -49,13 +41,9 @@ const CardContent = styled.div`
   justify-content: space-between;
   height: 100%;
   will-change: transform;
-  ${CardGrid + '[display="grid"]'} & {
+  ${CardGrid} & {
     flex-direction: column;
     padding: 1.5rem;
-  }
-  ${CardGrid + '[display="list"]'} & {
-    flex-direction: row;
-    padding: 1rem;
   }
 `
 

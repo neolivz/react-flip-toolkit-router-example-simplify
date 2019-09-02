@@ -77,8 +77,6 @@ function IconSetPage({
     <Flipped
       flipId={set}
       componentId="setPage"
-      // onComplete={onComplete}
-      // onStart={onStart}
     >
       <Background ref={elementRef}>
         <Flipped inverseFlipId={set}>

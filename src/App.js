@@ -24,28 +24,25 @@ history.push = args => {
   }
 }
 
+const RoutFlipper = ({
+  location,
+  search
+}) => (
+  <Flipper
+    flipKey={`${location.pathname}-${location.search}`}
+    decisionData={{
+      location,
+      search
+    }}
+  >
+    <IndexPage />
+  </Flipper>
+)
+
 
 const App = () => (
   <Router history={history}>
-    <Route
-      render={({ location, search }) => {
-        console.log({
-          location,
-          search,
-        })
-        return (
-          <Flipper
-            flipKey={`${location.pathname}-${location.search}`}
-            decisionData={{
-              location,
-              search
-            }}
-          >
-            <IndexPage />
-          </Flipper>
-        )
-      }}
-    />
+    <Route render={RoutFlipper} />
   </Router>
 )
 
