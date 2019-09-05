@@ -178,7 +178,6 @@ class IconSetCard extends PureComponent {
                         <Flipped flipId={id} shouldFlip={this.shouldFlip}>
                             <Icon style={iconBaseStyles} />
                         </Flipped>
-                        {id}
                       </IndexListItem>
                     )
                   })}
