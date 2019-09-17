@@ -54,12 +54,9 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const onExit = el => {
+const onExit = (el, fadeIns) => {
   return anime({
-    targets: [
-      ...el.querySelectorAll("[data-fade-in]"),
-      ...el.querySelectorAll("[data-icon-nonsample]")
-    ],
+    targets: [...fadeIns, ...el.querySelectorAll("[data-icon-nonsample]")],
     opacity: 0,
     easing: "easeOutSine",
     duration: 350,
@@ -67,11 +64,9 @@ const onExit = el => {
   }).finished;
 };
 
-function IconSetPage({
-  match: { params: { set, focusedIcon } = {} },
-  location
-}) {
+function IconSetPage({ match: { params: { set, focusedIcon } = {} } }) {
   const elementRef = useRef(null);
+  const fadeInRef = useRef([]);
   return (
     <Flipped flipId={set} componentId="setPage">
       <Background ref={elementRef}>
@@ -79,23 +74,26 @@ function IconSetPage({
           <InverseContainer>
             <SetContents>
               <SetDescription>
-                <div data-fade-in>
+                <div ref={el => fadeInRef.current.push(eval)}>
                   <StyledLink
                     to={{
                       pathname: "/",
                       state: {
-                        animate: () => onExit(elementRef.current)
+                        animate: () =>
+                          onExit(elementRef.current, fadeInRef.current)
                       }
                     }}
                   >
                     <FontAwesomeIcon icon={faArrowLeft} /> Back
                   </StyledLink>
                 </div>
-                <h1 data-fade-in>
+                <h1 ref={el => fadeInRef.current.push(eval)}>
                   {set[0].toUpperCase() + set.slice(1)}
                   &nbsp; Icons
                 </h1>
-                <p data-fade-in>click icon for detail view</p>
+                <p ref={el => fadeInRef.current.push(eval)}>
+                  click icon for detail view
+                </p>
               </SetDescription>
               <IconSetGrid>
                 {iconDict[set].map(({ name, Icon, id }) => {

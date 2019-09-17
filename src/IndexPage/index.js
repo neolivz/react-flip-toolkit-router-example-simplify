@@ -19,23 +19,25 @@ const IndexPage = ({ history, location }) => {
   const focusedSet = location.pathname.split(/\//g)[1];
 
   const visibleIconSets = useMemo(() => Object.keys(icons));
+  console.log({ focusedSet });
 
   return (
     <div>
       <Contents>
         <CardGrid>
-          {visibleIconSets.map(set => {
-            if (set === focusedSet) return <li key={set} />;
-            return (
-              <Card
-                key={set}
-                setKey={set}
-                icons={icons[set]}
-                iconCount={icons[set].length}
-                navigate={navigate}
-              />
-            );
-          })}
+          {focusedSet === "" &&
+            visibleIconSets.map(set => {
+              if (set === focusedSet) return <li key={set} />;
+              return (
+                <Card
+                  key={set}
+                  setKey={set}
+                  icons={icons[set]}
+                  iconCount={icons[set].length}
+                  navigate={navigate}
+                />
+              );
+            })}
         </CardGrid>
       </Contents>
       <Route path="/:set/:focusedIcon?" component={IconSetPage} />

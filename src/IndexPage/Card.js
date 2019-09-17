@@ -1,113 +1,39 @@
-import React, { PureComponent } from "react"
-import PropTypes from "prop-types"
-import styled from "styled-components"
-import { Flipped } from "react-flip-toolkit"
-import anime from "animejs"
-import { BaseGridList } from "../BaseComponents"
-import { CardGrid } from "./Components"
-import iconBaseStyles from "../iconBaseStyles"
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Flipped } from "react-flip-toolkit";
+import anime from "animejs";
 
-// using CSS inheritance here to allow the use of PureComponents
-// for better performance
-const IndexGrid = styled(BaseGridList)`
-  width: 100%;
-  grid-auto-rows: 3rem;
-  ${CardGrid} & {
-    grid-template-columns: repeat(3, 5rem);
-    grid-gap: 2rem;
-    margin-bottom: 2rem;
-  }
-`
-
-const IndexListItem = styled.li`
-  display: flex;
-  justify-content: center;
-`
-
-const Card = styled.li`
-  height: 100%;
-  transition: box-shadow 0.5s;
-  background-color: white;
-  overflow: hidden;
-  position: relative;
-  will-change: transform;
-  svg {
-    will-change: transform;
-  }
-`
-
-const CardContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  will-change: transform;
-  ${CardGrid} & {
-    flex-direction: column;
-    padding: 1.5rem;
-  }
-`
-
-const Description = styled.div`
-  min-width: 280px;
-  text-align: right;
-  text-decoration: none !important;
-  color: black;
-
-  > *:last-child {
-    margin-bottom: 0 !important;
-  }
-`
-
-const ListFlex = styled.div`
-  ${CardGrid + '[display="grid"]'} & {
-    display: block;
-  }
-  ${CardGrid + '[display="list"]'} & {
-    display: flex;
-    > div:first-of-type {
-      margin-right: 1rem;
-    }
-  }
-
-  justify-content: flex-end;
-  > * {
-    margin-bottom: 0.5rem;
-  }
-`
-
-const CardHeader = styled.h2`
-  display: inline-block;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-`
-
-const IconCount = styled.span`
-  display: inline-block;
-  font-weight: bold;
-`
-
-const Price = styled.span`
-  display: inline-block;
-`
+import iconBaseStyles from "../iconBaseStyles";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Description,
+  IconCount,
+  IndexGrid,
+  IndexListItem,
+  ListFlex,
+  Price
+} from "./CardStyle";
 
 class IconSetCard extends PureComponent {
   static propTypes = {
     setKey: PropTypes.string,
     highlightedIcons: PropTypes.array,
     iconCount: PropTypes.number
-  }
+  };
 
   onStart = (el, { previous: prevLocation, current: currentLocation }) => {
     if (
       prevLocation.location.pathname.match(this.props.setKey) &&
       currentLocation.location.pathname === "/"
     ) {
-      ;[...el.querySelectorAll("[data-fade-in]")].forEach(
+      [...el.querySelectorAll("[data-fade-in]")].forEach(
         el => (el.style.opacity = "0")
-      )
-      el.style.zIndex = "5"
+      );
+      el.style.zIndex = "5";
     }
-  }
+  };
 
   onComplete = (el, { previous: prevLocation, current: currentLocation }) => {
     if (
@@ -121,10 +47,10 @@ class IconSetCard extends PureComponent {
         delay: (el, i) => i * 70 + 300,
         easing: "easeOutSine",
         duration: 350
-      })
-      el.style.zIndex = ""
+      });
+      el.style.zIndex = "";
     }
-  }
+  };
 
   onDelayedAppear = (el, index) => {
     anime({
@@ -134,8 +60,8 @@ class IconSetCard extends PureComponent {
       easing: "easeOutSine",
       delay: index * 40,
       duration: 400
-    })
-  }
+    });
+  };
 
   onExit = (el, index, removeElement) => {
     anime({
@@ -146,17 +72,15 @@ class IconSetCard extends PureComponent {
       duration: 400,
       delay: index * 40,
       complete: removeElement
-    })
-  }
+    });
+  };
 
   navigate = () => {
-    this.props.navigate(this.props.setKey)
-  }
-
-
+    this.props.navigate(this.props.setKey);
+  };
 
   render() {
-    const { setKey, icons, iconCount } = this.props
+    const { setKey, icons, iconCount } = this.props;
     return (
       <Flipped
         flipId={setKey}
@@ -176,10 +100,10 @@ class IconSetCard extends PureComponent {
                     return (
                       <IndexListItem key={id}>
                         <Flipped flipId={id} shouldFlip={this.shouldFlip}>
-                            <Icon style={iconBaseStyles} />
+                          <Icon style={iconBaseStyles} />
                         </Flipped>
                       </IndexListItem>
-                    )
+                    );
                   })}
               </IndexGrid>
               <Description ref={el => (this.description = el)}>
@@ -217,8 +141,8 @@ class IconSetCard extends PureComponent {
           </Flipped>
         </Card>
       </Flipped>
-    )
+    );
   }
 }
 
-export default IconSetCard
+export default IconSetCard;
