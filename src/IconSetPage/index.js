@@ -1,14 +1,14 @@
-import React, { useRef } from "react"
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import { Flipped } from "react-flip-toolkit"
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { Flipped } from "react-flip-toolkit";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
-import anime from "animejs"
-import iconDict from "../IconComponents"
-import { Contents } from "../BaseComponents"
-import IconBlock from "./IconBlock"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import anime from "animejs";
+import iconDict from "../IconComponents";
+import { Contents } from "../BaseComponents";
+import IconBlock from "./IconBlock";
 
 const IconSetGrid = styled.ul`
   display: grid;
@@ -19,10 +19,9 @@ const IconSetGrid = styled.ul`
   grid-auto-rows: 4.5rem;
   grid-gap: 2rem;
   grid-auto-flow: dense;
-`
+`;
 
-const InverseContainer = styled.div`
-`
+const InverseContainer = styled.div``;
 
 const Background = styled.div`
   position: absolute;
@@ -33,12 +32,12 @@ const Background = styled.div`
   min-height: 100vh;
   background-color: white;
   z-index: 2;
-`
+`;
 
 const SetContents = styled(Contents)`
   margin-top: 6rem;
   min-height: 80vh;
-`
+`;
 
 const SetDescription = styled.div`
   h2 {
@@ -46,14 +45,14 @@ const SetDescription = styled.div`
     margin-bottom: 1rem;
   }
   margin-bottom: 3rem;
-`
+`;
 
 const StyledLink = styled(Link)`
   color: black;
   &:hover {
     text-decoration: underline;
   }
-`
+`;
 
 const onExit = el => {
   return anime({
@@ -65,19 +64,16 @@ const onExit = el => {
     easing: "easeOutSine",
     duration: 350,
     delay: anime.stagger(20)
-  }).finished
-}
+  }).finished;
+};
 
 function IconSetPage({
   match: { params: { set, focusedIcon } = {} },
   location
 }) {
-  const elementRef = useRef(null)
+  const elementRef = useRef(null);
   return (
-    <Flipped
-      flipId={set}
-      componentId="setPage"
-    >
+    <Flipped flipId={set} componentId="setPage">
       <Background ref={elementRef}>
         <Flipped inverseFlipId={set}>
           <InverseContainer>
@@ -87,7 +83,6 @@ function IconSetPage({
                   <StyledLink
                     to={{
                       pathname: "/",
-                      search: location.search,
                       state: {
                         animate: () => onExit(elementRef.current)
                       }
@@ -112,7 +107,7 @@ function IconSetPage({
                       name={name}
                       set={set}
                     />
-                  )
+                  );
                 })}
               </IconSetGrid>
             </SetContents>
@@ -120,7 +115,7 @@ function IconSetPage({
         </Flipped>
       </Background>
     </Flipped>
-  )
+  );
 }
 
-export default IconSetPage
+export default IconSetPage;
