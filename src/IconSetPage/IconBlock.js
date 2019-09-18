@@ -1,40 +1,11 @@
-import React, { PureComponent } from "react"
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import { Flipped } from "react-flip-toolkit"
-import anime from "animejs"
-import iconBaseStyles from "../iconBaseStyles"
-
-const StyledLink = styled(Link)`
-  color: black;
-  width: 100%;
-  display: block;
-  height: ${props => (props.isFocused ? "80%" : "100%")};
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-const IconGridItem = styled.li`
-  grid-column: ${props => (props.isFocused ? "span 3" : "")};
-  grid-row: ${props => (props.isFocused ? "span 3" : "")};
-  padding: ${props => (props.isFocused ? "2rem" : "0")};
-  padding-top: 0;
-  svg {
-    will-change: transform;
-  }
-`
-
-const AnimatedIconTitle = styled.h3`
-  margin-top: 0;
-  margin-bottom: 2rem;
-  animation-delay: 0.25s;
-  font-size: 1.15rem;
-  font-weight: normal;
-`
+import React, { PureComponent } from "react";
+import { Flipped } from "react-flip-toolkit";
+import anime from "animejs";
+import iconBaseStyles from "../iconBaseStyles";
+import { AnimatedIconTitle, IconGridItem, StyledLink } from "./IconBlockStyle";
 
 class IconBlock extends PureComponent {
-  state = { sampleIcon: true }
+  state = { sampleIcon: true };
   onAppear = (el, i) => {
     anime({
       targets: el,
@@ -43,14 +14,13 @@ class IconBlock extends PureComponent {
       scale: [0.25, 1],
       duration: 250,
       easing: "easeOutSine"
-    })
-    this.setState({ sampleIcon: false })
-  }
+    });
+    this.setState({ sampleIcon: false });
+  };
 
   render() {
-    const { Icon, isFocused, id, name, set } = this.props
-    const extraProps = {}
-    if (!this.state.sampleIcon) extraProps["data-icon-nonsample"] = true
+    const { Icon, isFocused, id, name, set } = this.props;
+    const extraProps = {};
     return (
       <IconGridItem key={id} isFocused={isFocused} {...extraProps}>
         {isFocused && (
@@ -62,17 +32,14 @@ class IconBlock extends PureComponent {
             </AnimatedIconTitle>
           </Flipped>
         )}
-        <StyledLink
-          to={`/${set}/${isFocused ? "" : name}`}
-          isFocused={isFocused}
-        >
+        <StyledLink to={`/${set}/${isFocused ? "" : name}`}>
           <Flipped flipId={id} onAppear={this.onAppear}>
             <Icon style={{ ...iconBaseStyles }} />
           </Flipped>
         </StyledLink>
       </IconGridItem>
-    )
+    );
   }
 }
 
-export default IconBlock
+export default IconBlock;

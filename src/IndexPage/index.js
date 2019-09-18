@@ -27,7 +27,6 @@ const IndexPage = ({ history, location }) => {
         <CardGrid>
           {focusedSet === "" &&
             visibleIconSets.map(set => {
-              if (set === focusedSet) return <li key={set} />;
               return (
                 <Card
                   key={set}
