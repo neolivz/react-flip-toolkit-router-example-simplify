@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { CardGrid } from './Components'
 import Card from './Card'
@@ -19,7 +19,6 @@ const IndexPage = ({ history, location }) => {
     const focusedSet = location.pathname.split(/\//g)[1]
 
     const visibleIconSets = useMemo(() => Object.keys(icons))
-    console.log({ focusedSet })
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { Flipped } from 'react-flip-toolkit'
 import anime from 'animejs'
 import iconBaseStyles from '../iconBaseStyles'
