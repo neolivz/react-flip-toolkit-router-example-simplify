@@ -3,7 +3,6 @@ import { Route, withRouter } from "react-router-dom";
 
 import { CardGrid } from "./Components";
 import Card from "./Card";
-import IconSetPage from "../IconSetPage";
 import { Contents } from "../BaseComponents";
 import icons from "../IconComponents";
 
@@ -39,7 +38,6 @@ const IndexPage = ({ history, location }) => {
             })}
         </CardGrid>
       </Contents>
-      <Route path="/:set/:focusedIcon?" component={IconSetPage} />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { Router } from "react-router";
 import { Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import IndexPage from "./IndexPage";
+import IconSetPage from "./IconSetPage";
 import { Flipper } from "react-flip-toolkit";
 
 const history = createBrowserHistory();
@@ -31,7 +32,8 @@ const RoutFlipper = ({ location }) => (
       location
     }}
   >
-    <IndexPage />
+    <Route expact path="/" component={IndexPage} />
+    <Route path="/:set/:focusedIcon?" component={IconSetPage} />
   </Flipper>
 );
 
