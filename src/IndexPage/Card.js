@@ -23,6 +23,8 @@ const IconSetCard = ({
     iconCount,
 }) => {
     const fadeIns = useRef([])
+    const addToFadeIns = el => el && fadeIns.current.push(el)
+    console.log({ fadeIns: [...fadeIns.current] })
 
     const onStart = useCallback(
         (el, { previous: prevLocation, current: currentLocation }) => {
@@ -30,7 +32,9 @@ const IconSetCard = ({
                 prevLocation.location.pathname.match(setKey) &&
                 currentLocation.location.pathname === '/'
             ) {
-                fadeIns.current.forEach(el => (el.style.opacity = '0'))
+                fadeIns.current.forEach(el => {
+                    el.style.opacity = '0'
+                })
                 el.style.zIndex = '5'
             }
         },
@@ -116,9 +120,7 @@ const IconSetCard = ({
                         </IndexGrid>
                         <Description>
                             <Flipped flipId={`${setKey}-title`} translate>
-                                <CardHeader
-                                    ref={el => fadeIns.current.push(el)}
-                                >
+                                <CardHeader ref={addToFadeIns}>
                                     {setKey[0].toUpperCase() + setKey.slice(1)}{' '}
                                     Icons
                                 </CardHeader>
@@ -129,9 +131,7 @@ const IconSetCard = ({
                                         flipId={`${setKey}-count`}
                                         translate
                                     >
-                                        <IconCount
-                                            ref={el => fadeIns.current.push(el)}
-                                        >
+                                        <IconCount ref={addToFadeIns}>
                                             {iconCount} icons
                                         </IconCount>
                                     </Flipped>
@@ -141,9 +141,7 @@ const IconSetCard = ({
                                         flipId={`${setKey}-price`}
                                         translate
                                     >
-                                        <Price
-                                            ref={el => fadeIns.current.push(el)}
-                                        >
+                                        <Price ref={addToFadeIns}>
                                             ${iconCount / 2}
                                         </Price>
                                     </Flipped>

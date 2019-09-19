@@ -7,16 +7,16 @@ import Card from './Card'
 import { Contents } from '../BaseComponents'
 import icons from '../IconComponents'
 
-const IndexPage = ({ history, location }) => {
+const IndexPage = ({ history }) => {
     const navigate = useCallback(
-        set =>
+        set => {
+            console.log({ set, url: set.replace(/\s/g, '-') })
             history.push({
                 pathname: `/${set.replace(/\s/g, '-')}`,
-            }),
+            })
+        },
         [history],
     )
-
-    const focusedSet = location.pathname.split(/\//g)[1]
 
     const visibleIconSets = useMemo(() => Object.keys(icons))
 
@@ -24,18 +24,17 @@ const IndexPage = ({ history, location }) => {
         <div>
             <Contents>
                 <CardGrid>
-                    {focusedSet === '' &&
-                        visibleIconSets.map(set => {
-                            return (
-                                <Card
-                                    key={set}
-                                    setKey={set}
-                                    icons={icons[set]}
-                                    iconCount={icons[set].length}
-                                    navigate={navigate}
-                                />
-                            )
-                        })}
+                    {visibleIconSets.map(set => {
+                        return (
+                            <Card
+                                key={set}
+                                setKey={set}
+                                icons={icons[set]}
+                                iconCount={icons[set].length}
+                                navigate={navigate}
+                            />
+                        )
+                    })}
                 </CardGrid>
             </Contents>
         </div>
