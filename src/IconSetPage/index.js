@@ -1,121 +1,62 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Flipped } from "react-flip-toolkit";
+import React, { useRef } from 'react'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import anime from "animejs";
-import iconDict from "../IconComponents";
-import { Contents } from "../BaseComponents";
-import IconBlock from "./IconBlock";
+import { Flipped } from 'react-flip-toolkit'
 
-const IconSetGrid = styled.ul`
-  display: grid;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  grid-template-columns: repeat(auto-fill, 7.5rem);
-  grid-auto-rows: 4.5rem;
-  grid-gap: 2rem;
-  grid-auto-flow: dense;
-`;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import iconDict from '../IconComponents'
 
-const InverseContainer = styled.div``;
+import IconBlock from './IconBlock'
+import {
+    Background,
+    IconSetGrid,
+    InverseContainer,
+    SetContents,
+    SetDescription,
+    StyledLink,
+} from './IconSetPageStyle'
 
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  min-height: 100vh;
-  background-color: white;
-  z-index: 2;
-`;
-
-const SetContents = styled(Contents)`
-  margin-top: 6rem;
-  min-height: 80vh;
-`;
-
-const SetDescription = styled.div`
-  h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  margin-bottom: 3rem;
-`;
-
-const StyledLink = styled(Link)`
-  color: black;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const onExit = el => {
-  return anime({
-    targets: [
-      ...el.querySelectorAll("[data-fade-in]"),
-      ...el.querySelectorAll("[data-icon-nonsample]")
-    ],
-    opacity: 0,
-    easing: "easeOutSine",
-    duration: 350,
-    delay: anime.stagger(20)
-  }).finished;
-};
-
-function IconSetPage({
-  match: { params: { set, focusedIcon } = {} },
-  location
-}) {
-  const elementRef = useRef(null);
-  return (
-    <Flipped flipId={set} componentId="setPage">
-      <Background ref={elementRef}>
-        <Flipped inverseFlipId={set}>
-          <InverseContainer>
-            <SetContents>
-              <SetDescription>
-                <div data-fade-in>
-                  <StyledLink
-                    to={{
-                      pathname: "/",
-                      state: {
-                        animate: () => onExit(elementRef.current)
-                      }
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faArrowLeft} /> Back
-                  </StyledLink>
-                </div>
-                <h1 data-fade-in>
-                  {set[0].toUpperCase() + set.slice(1)}
-                  &nbsp; Icons
-                </h1>
-                <p data-fade-in>click icon for detail view</p>
-              </SetDescription>
-              <IconSetGrid>
-                {iconDict[set].map(({ name, Icon, id }) => {
-                  return (
-                    <IconBlock
-                      Icon={Icon}
-                      isFocused={name === focusedIcon}
-                      id={id}
-                      name={name}
-                      set={set}
-                    />
-                  );
-                })}
-              </IconSetGrid>
-            </SetContents>
-          </InverseContainer>
+function IconSetPage({ match: { params: { set, focusedIcon } = {} } }) {
+    const elementRef = useRef(null)
+    return (
+        <Flipped flipId={set} componentId="setPage">
+            <Background ref={elementRef}>
+                <Flipped inverseFlipId={set}>
+                    <InverseContainer>
+                        <SetContents>
+                            <SetDescription>
+                                <div>
+                                    <StyledLink to="/">
+                                        <FontAwesomeIcon icon={faArrowLeft} />{' '}
+                                        Back
+                                    </StyledLink>
+                                </div>
+                                <h1>
+                                    {set[0].toUpperCase() + set.slice(1)}
+                                    &nbsp; Icons
+                                </h1>
+                                <p>click icon for detail view</p>
+                            </SetDescription>
+                            <IconSetGrid>
+                                {iconDict[set].map(({ name, Icon, id }) => {
+                                    return (
+                                        <IconBlock
+                                            key={id}
+                                            Icon={Icon}
+                                            isFocused={name === focusedIcon}
+                                            id={id}
+                                            name={name}
+                                            set={set}
+                                        />
+                                    )
+                                })}
+                            </IconSetGrid>
+                        </SetContents>
+                    </InverseContainer>
+                </Flipped>
+            </Background>
         </Flipped>
-      </Background>
-    </Flipped>
-  );
+    )
 }
 
-export default IconSetPage;
+export default IconSetPage
