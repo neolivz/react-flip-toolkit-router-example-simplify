@@ -24,7 +24,7 @@
     "deploy": "yarn run build; cd build; cp index.html 200.html; surge --domain react-flip-toolkit.surge.sh"
   },
   "devDependencies": {
-    "react-scripts": "2.1.5"
+    "react-scripts": "5.0.1"
   },
   "browserslist": [
     ">0.2%",
